@@ -29,13 +29,15 @@ public class GuavaCache<K,V> {
 					System.out.println("----------有缓存数据被移除了-----------");
 				} 
 			})
-			.build(new CacheLoader<K, V>(){ //通过回调加载缓存
-                @SuppressWarnings("unchecked")
-				@Override
-                public V load(K key) throws Exception {
-                    return (V)(key + "-" + "cache");
-                }
-        });
+			.build(
+					/*new CacheLoader<K, V>(){ //通过回调加载缓存
+		                @SuppressWarnings("unchecked")
+						@Override
+		                public V load(K key) throws Exception {
+		                    return (V)(key + "-" + "cache");
+		                }
+		        }*/
+					);
 	
 	/**
 	 * 使用Guava cache获取数据
@@ -61,5 +63,15 @@ public class GuavaCache<K,V> {
 			e.printStackTrace();
 		}
 		return value;
+	}
+	
+	public static void main(String[] args){
+		GuavaCache<String, String> gcache = new GuavaCache<String, String>();
+		Object cache1 = gcache.getCache("key","t1");
+		Object cache2 = gcache.getCache("key","t2");
+		Object cache3 = gcache.getCache("key","t3");
+		System.out.println("t1---cache---:" + cache1);
+		System.out.println("t2---cache---:" + cache2);
+		System.out.println("t3---cache---:" + cache3);
 	}
 }
