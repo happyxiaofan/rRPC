@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+	<!-- 配置注解扫描 -->
+	<context:component-scan base-package="com.rhwayfun.rRPC.common.task"
+		annotation-config="true" />
+
+	<!-- 定时任务注解启动 -->
+	<task:executor id="executor" pool-size="50" />
+	<task:scheduler id="scheduler" pool-size="100" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+
+	<!-- 配置自定义任务 -->
+	<bean name="scrapydTask" class="com.rhwayfun.rRPC.common.task.BaseTask"></bean>
+
+	<!-- <task:executor id="taskExecutor" pool-size="50" />
+	<task:executor id="overtimeMonitorExecutor" pool-size="20" />
+	<task:executor id="threadPool" pool-size="20" />
+
+	<task:scheduler id="taskScheduler" pool-size="100" />
+
+	<task:scheduled-tasks scheduler="taskScheduler">
+
+		扣除骑手保险费任务 每15s执行一次
+		<task:scheduled ref="deductRiderDeposit4CityTask" method="execute" 
+			cron="15/15 * * * * ?"/>
+		扣除骑手保险费任务 每15s执行一次
+		<task:scheduled ref="deductRiderDepositTask" method="execute" cron="15/15 
+			* * * * ?"/>
+		统计所有用户地址 每天凌晨0点10执行
+		<task:scheduled ref="recordUserAddressTask" method="execute"
+			cron="0 10 0 * * ?" />
+
+	</task:scheduled-tasks> -->
+
+</beans>
