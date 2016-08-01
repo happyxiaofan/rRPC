@@ -8,8 +8,7 @@
 			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
 
 	<!-- 配置注解扫描 -->
-	<context:component-scan base-package="com.rhwayfun.rRPC.common.task"
-		annotation-config="true" />
+	<context:component-scan base-package="com.rhwayfun.rRPC.common.task" annotation-config="true" />
 
 	<!-- 定时任务注解启动 -->
 	<task:executor id="executor" pool-size="50" />
@@ -17,7 +16,10 @@
 	<task:annotation-driven executor="executor" scheduler="scheduler" />
 
 	<!-- 配置自定义任务 -->
-	<bean name="scrapydTask" class="com.rhwayfun.rRPC.common.task.BaseTask"></bean>
+	<bean name="baseTask" class="com.rhwayfun.rRPC.common.task.BaseTask"></bean>
+	<task:scheduled-tasks scheduler="scheduler">
+		<task:scheduled ref="baseTask" method="reportCurrentTime" cron="15/15 * * * * ?"/>
+	</task:scheduled-tasks>
 
 	<!-- <task:executor id="taskExecutor" pool-size="50" />
 	<task:executor id="overtimeMonitorExecutor" pool-size="20" />
