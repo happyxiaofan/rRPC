@@ -63,8 +63,7 @@
 		<property name="advice" ref="methodCacheInterceptor" />
 		<property name="pattern" value=".*ServiceImpl.*getTimeStamp" />
 	</bean>
-	<bean id="redisTestService" class="com.rhwayfun.rRPC.common.redis.impl.RedisTestServiceImpl">
-	</bean>
+	<bean id="redisTestService" class="com.rhwayfun.rRPC.common.redis.impl.RedisTestServiceImpl" />
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
 
 </beans>
