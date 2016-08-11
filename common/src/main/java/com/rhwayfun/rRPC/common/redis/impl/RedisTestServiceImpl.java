@@ -15,7 +15,6 @@ import com.rhwayfun.rRPC.service.RedisTestService;
 @Service
 public class RedisTestServiceImpl implements RedisTestService {
 
-	@Override
 	public String getTimeStamp(String param) {
 		Long time = System.currentTimeMillis();
 		return time.toString();
